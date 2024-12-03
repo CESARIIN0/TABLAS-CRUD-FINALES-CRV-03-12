@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarEmpleado/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group py-3">
+                        <input type="number" id="txtid_empleado" name="txtid_empleado" class="form-control" value="{{ misempleados.id_empleado }}" readonly>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misempleados.nombre }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txttelefono" name="txttelefono" class="form-control" value="{{ misempleados.telefono }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" value="{{ misempleados.correo }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtcargo" name="txtcargo" class="form-control" value="{{ misempleados.cargo }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha_ingreso" name="txtfecha_ingreso" class="form-control" value="{{ fecha_fin}}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txthora_llegada" name="txthora_llegada" class="form-control" value="{{ misempleados.hora_llegada }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-warning">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
