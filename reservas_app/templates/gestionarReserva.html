@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Reserva</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarReserva/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Código Reserva" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtidcliente" name="txtidcliente" class="form-control" placeholder="ID Cliente" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="datelafecha" name="datelafecha" class="form-control" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtnumero" name="txtnumero" class="form-control" placeholder="Número Reserva" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txthoraLlegada" name="txthoraLlegada" class="form-control" placeholder="Hora Llegada" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txthoraSalida" name="txthoraSalida" class="form-control" placeholder="Hora Salida" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtidmesa" name="txtidmesa" class="form-control" placeholder="ID Mesa" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+      <img class="w-50" src="{% static 'img/reserva.jpeg' %}" width="400" height="400" alt="">
+        <h1>Listado de Reservas</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID Reserva</th>
+                        <th>ID Cliente</th>
+                        <th>Fecha Reserva</th>
+                        <th>Número Reserva</th>
+                        <th>Hora Llegada</th>
+                        <th>Hora Salida</th>
+                        <th>ID Mesa</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in misreservas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ r.id_reserva }}</td>
+                        <td>{{ r.id_cliente }}</td>
+                        <td>{{ r.fecha_reserva }}</td>
+                        <td>{{ r.numero_reserva }}</td>
+                        <td>{{ r.hora_llegada }}</td>
+                        <td>{{ r.hora_salida }}</td>
+                        <td>{{ r.id_mesa }}</td>
+                        <td><a href="seleccionarReserva/{{ r.id_reserva }}" class="btn btn-info">Editar</a></td>
+                        <td><a href="borrarReserva/{{ r.id_reserva }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
