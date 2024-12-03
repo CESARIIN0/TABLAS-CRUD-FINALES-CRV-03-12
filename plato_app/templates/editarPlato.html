@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarPlato/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group py-3">
+                        <input type="number" id="txtid_plato" name="txtid_plato" class="form-control" value="{{ misplatos.id_plato }}" readonly>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misplatos.nombre }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <textarea id="txtdescripcion" name="txtdescripcion" class="form-control" required>{{ misplatos.descripcion }}</textarea>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="numprecio" name="numprecio" class="form-control" value="{{ misplatos.precio }}" step="0.01" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipo" name="txttipo" class="form-control" value="{{ misplatos.tipo }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfechasolicitud" name="txtfechasolicitud" class="form-control" value="{{ fecha_fin }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha_entrega" name="txtfecha_entrega" class="form-control" value="{{ fecha_inicio }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="num" id="numplatos" name="numplatos" class="form-control" value="{{ Cuantos_Platos}}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-warning">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Plato</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarPlato/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group py-3">
+                        <input type="number" id="txtid_plato" name="txtid_plato" class="form-control" placeholder="ID Plato" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <textarea id="txtdescripcion" name="txtdescripcion" class="form-control" placeholder="Descripción" required></textarea>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="numprecio" name="numprecio" class="form-control" placeholder="Precio" step="0.01" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipo" name="txttipo" class="form-control" placeholder="Tipo" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfechasolicitud" name="txtfechasolicitud" class="form-control" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha_entrega" name="txtfecha_entrega" class="form-control" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numplatos" name="numplatos" class="form-control" placeholder="Numero de platos" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <img class="w-50" src="{% static 'img/platos.jpeg' %}" width="400" height="400" alt="">
+        <h1>Listado de Platos</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        <th>Fecha Solicitud</th>
+                        <th>Fecha Entrega</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in misplatos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p.id_plato }}</td>
+                        <td>{{ p.nombre }}</td>
+                        <td>{{ p.descripcion }}</td>
+                        <td>{{ p.precio }}</td>
+                        <td>{{ p.tipo }}</td>
+                        <td>{{ p.fechasolicitud }}</td>
+                        <td>{{ p.fecha_entrega }}</td>
+                        <td>{{ p.Cuantos_Platos }}</td>
+                        <td>
+                            <a href="seleccionarPlato/{{ p.id_plato }}" class="btn btn-info">Editar</a>
+                            <a href="borrarPlato/{{ p.id_plato }}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
