@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Tienda</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarTienda/" method="POST"> {% csrf_token %}
+                    <div class="form-group py-3">
+                        <input type="number" id="txtid_tienda" name="txtid_tienda" class="form-control" placeholder="ID Tienda" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre de la Tienda" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numtelefono" name="numtelefono" class="form-control" placeholder="Teléfono" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo_electronico" name="txtcorreo_electronico" class="form-control" placeholder="Correo Electrónico" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txthorario" name="txthorario" class="form-control" placeholder="Horario de la Tienda" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipo_de_productos" name="txttipo_de_productos" class="form-control" placeholder="Tipo de Productos" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
+        <img class="w-50" src="{% static 'img/tienda.jpeg' %}" width="400" height="400" alt="">
+        <h1>Listado de Tiendas</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tienda</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Tipo</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in mistiendas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ t.id_tienda }}</td>
+                        <td>{{ t.nombre }}</td>
+                        <td>{{ t.direccion }}</td>
+                        <td>{{ t.telefono }}</td>
+                        <td>{{ t.correo_electronico }}</td>
+                        <td>{{ t.horario }}</td>
+                        <td>{{ t.tipo_de_productos }}</td>
+                        <td><a href="seleccionarTienda/{{ t.id_tienda }}" class="btn btn-info">Editar</a></td>
+                        <td><a href="borrarTienda/{{ t.id_tienda }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

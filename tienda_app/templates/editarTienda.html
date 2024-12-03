@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarTienda/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group py-3">
+                        <input type="number" id="txtid_tienda" name="txtid_tienda" class="form-control" value="{{ mistiendas.id_tienda }}" readonly required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ mistiendas.nombre }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" value="{{ mistiendas.direccion }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numtelefono" name="numtelefono" class="form-control" value="{{ mistiendas.telefono }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo_electronico" name="txtcorreo_electronico" class="form-control" value="{{ mistiendas.correo_electronico }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txthorario" name="txthorario" class="form-control" value="{{ mistiendas.horario }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipo_de_productos" name="txttipo_de_productos" class="form-control" value="{{ mistiendas.tipo_de_productos }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
