@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cuerpo %}
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <h1>Registrar Venta</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="/registrarVenta/" method="POST">
+          {% csrf_token %}
+          <div class="form-group py-3" >
+            <input
+              type="number"
+              id="txtid_venta"
+              name="txtid_venta"
+              class="form-control"
+              placeholder="ID Venta"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_empleado"
+              name="txtid_empleado"
+              class="form-control"
+              placeholder="ID Empleado"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_cliente"
+              name="txtid_cliente"
+              class="form-control"
+              placeholder="ID Cliente"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="date"
+              id="txtfecha_venta"
+              name="txtfecha_venta"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_plato"
+              name="txtid_plato"
+              class="form-control"
+              placeholder="ID Plato"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="text"
+              id="txttotal_venta"
+              name="txttotal_venta"
+              class="form-control"
+              placeholder="Total Venta"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="text"
+              id="txtdescripcion"
+              name="txtdescripcion"
+              class="form-control"
+              placeholder="Descripción"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
+    <img class="w-50" src="{% static 'img/ventas.jpeg' %}" width="400" height="400" alt="">
+    <h1>Listado de Ventas</h1>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID Venta</th>
+            <th>ID Empleado</th>
+            <th>ID Cliente</th>
+            <th>Fecha Venta</th>
+            <th>ID Plato</th>
+            <th>Total Venta</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in misventas %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ v.id_venta }}</td>
+            <td>{{ v.id_empleado }}</td>
+            <td>{{ v.id_cliente }}</td>
+            <td>{{ v.fecha_venta }}</td>
+            <td>{{ v.id_plato }}</td>
+            <td>{{ v.total_venta }}</td>
+            <td>{{ v.descripcion }}</td>
+            <td>
+              <a href="seleccionarVenta/{{ v.id_venta }}" class="btn btn-info">Editar</a>
+              <a href="borrarVenta/{{ v.id_venta }}" class="btn btn-danger">Borrar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

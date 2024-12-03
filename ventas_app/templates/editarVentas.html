@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-body">
+        <form action="/editarVenta/" method="POST">
+          {% csrf_token %}
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_venta"
+              name="txtid_venta"
+              class="form-control"
+              value="{{ misventas.id_venta }}"
+              readonly
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_empleado"
+              name="txtid_empleado"
+              class="form-control"
+              value="{{ misventas.id_empleado }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_cliente"
+              name="txtid_cliente"
+              class="form-control"
+              value="{{ misventas.id_cliente }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="date"
+              id="txtfecha_venta"
+              name="txtfecha_venta"
+              class="form-control"
+              value="{{ fecha_fin }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txtid_plato"
+              name="txtid_plato"
+              class="form-control"
+              value="{{ misventas.id_plato }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="number"
+              id="txttotal_venta"
+              name="txttotal_venta"
+              class="form-control"
+              value="{{ misventas.total_venta }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <input
+              type="text"
+              id="txtdescripcion"
+              name="txtdescripcion"
+              class="form-control"
+              value="{{ misventas.descripcion }}"
+              required
+            />
+          </div>
+          <div class="form-group py-3">
+            <button type="submit" class="btn btn-success">Actualizar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
